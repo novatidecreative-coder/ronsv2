@@ -751,7 +751,7 @@ document.querySelectorAll('.carousel-btn-next').forEach(btn => {
 // IMAGE UPLOAD & COMPRESSION
 // ================================================
 
-function compressImage(file, maxWidth = 800, maxHeight = 600, quality = 0.5) {
+function compressImage(file, maxWidth = 900, maxHeight = 700, quality = 0.65) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         
@@ -1034,7 +1034,7 @@ if (aboutPhotoUpload) {
         
         if (file && validateImageFile(file)) {
             try {
-                const compressedImage = await compressImage(file, 400, 600, 0.5);
+                const compressedImage = await compressImage(file, 500, 700, 0.65);
                 localStorage.setItem('aboutPhoto', compressedImage);
                 
                 const aboutPhoto = document.getElementById('about-photo');
@@ -1414,8 +1414,8 @@ if (logoUpload) {
         
         if (file && validateImageFile(file)) {
             try {
-                // Use smaller max dimensions and quality for logo
-                const compressedImage = await compressImage(file, 250, 120, 0.65);
+                // Higher quality for logo clarity
+                const compressedImage = await compressImage(file, 350, 180, 0.85);
                 localStorage.setItem('customLogo', compressedImage);
                 
                 // Update logo immediately
@@ -1513,7 +1513,7 @@ if (heroImageUpload) {
         
         if (file && validateImageFile(file)) {
             try {
-                const compressedImage = await compressImage(file, 1200, 700, 0.55);
+                const compressedImage = await compressImage(file, 1400, 800, 0.65);
                 localStorage.setItem('heroBackground', compressedImage);
                 
                 // Update hero immediately
@@ -1753,8 +1753,8 @@ if (baAfterUpload) {
         const file = e.target.files[0];
         if (file && validateImageFile(file)) {
             try {
-                // Use very aggressive compression for before/after to save storage
-                const compressed = await compressImage(file, 600, 450, 0.45);
+                // Optimize before/after with balanced quality
+                const compressed = await compressImage(file, 700, 550, 0.60);
                 tempAfterImage = compressed;
                 
                 const preview = document.getElementById('ba-after-preview');

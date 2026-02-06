@@ -50,6 +50,12 @@ img {
     max-width: 100%;
     height: auto;
     display: block;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 }
 
 a {
@@ -189,11 +195,13 @@ ul {
 }
 
 .logo-icon {
-    width: 65px;
-    height: 65px;
+    width: 85px;
+    height: 85px;
     flex-shrink: 0;
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.2));
     transition: transform 0.3s ease;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 
 .logo:hover .logo-icon {
@@ -202,13 +210,15 @@ ul {
 
 /* Custom Logo Image */
 .custom-logo-img {
-    max-height: 70px;
-    max-width: 280px;
+    max-height: 90px;
+    max-width: 350px;
     height: auto;
     width: auto;
     object-fit: contain;
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.2));
     transition: transform 0.3s ease;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 
 .logo:hover .custom-logo-img {
@@ -216,7 +226,7 @@ ul {
 }
 
 .logo-text {
-    font-size: 1.5rem;
+    font-size: 1.65rem;
     letter-spacing: -0.5px;
     font-weight: 800;
 }
@@ -1211,17 +1221,17 @@ ul {
     }
     
     .logo-icon {
-        width: 50px;
-        height: 50px;
+        width: 70px;
+        height: 70px;
     }
     
     .custom-logo-img {
-        max-height: 55px;
-        max-width: 220px;
+        max-height: 75px;
+        max-width: 300px;
     }
     
     .logo-text {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
     }
     
     /* Before/After responsive */
@@ -1457,6 +1467,8 @@ ul {
     object-fit: cover;
     object-position: center;
     display: block;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 
 /* Placeholder for empty galleries */
@@ -1597,6 +1609,8 @@ ul {
     height: 100%;
     object-fit: cover;
     display: block;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 
 .photo-placeholder {
@@ -1707,6 +1721,8 @@ ul {
     object-fit: cover;
     object-position: center;
     display: block;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 
 .image-label {
