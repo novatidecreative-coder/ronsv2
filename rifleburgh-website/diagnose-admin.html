@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel Diagnostic Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .result {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 2px solid #e0e0e0;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .success {
+            color: #11998e;
+            font-weight: bold;
+        }
+        
+        .error {
+            color: #f5576c;
+            font-weight: bold;
+        }
+        
+        .warning {
+            color: #f093fb;
+            font-weight: bold;
+        }
+        
+        .step {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 3px solid #667eea;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        code {
+            background: #f0f0f0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+        }
+        
+        .iframe-container {
+            width: 100%;
+            height: 600px;
+            border: 3px solid #667eea;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Admin Panel Diagnostic Tool</h1>
+        <p class="subtitle">Let's find out why the admin button isn't working</p>
+        
+        <!-- Step 1: Check Elements -->
+        <div class="section">
+            <h2>Step 1: Check HTML Elements</h2>
+            <p>This will verify if all required elements exist in your HTML.</p>
+            <button class="btn" onclick="checkElements()">🔍 Check Elements</button>
+            <div id="elements-result" class="result" style="display:none;"></div>
+        </div>
+        
+        <!-- Step 2: Check Event Listeners -->
+        <div class="section">
+            <h2>Step 2: Check JavaScript</h2>
+            <p>This will test if the event listener is attached to the admin button.</p>
+            <button class="btn btn-success" onclick="checkEventListeners()">⚡ Check Event Listeners</button>
+            <div id="listeners-result" class="result" style="display:none;"></div>
+        </div>
+        
+        <!-- Step 3: Manual Test -->
+        <div class="section">
+            <h2>Step 3: Manual Open Test</h2>
+            <p>Try to open the admin panel using different methods.</p>
+            <button class="btn btn-warning" onclick="manualOpen()">📂 Open Admin Panel</button>
+            <button class="btn btn-warning" onclick="openInNewWindow()">🪟 Open in New Window</button>
+            <div id="manual-result" class="result" style="display:none;"></div>
+        </div>
+        
+        <!-- Step 4: Console Logs -->
+        <div class="section">
+            <h2>Step 4: Browser Console Check</h2>
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Press F12</strong> to open Developer Tools
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                Click the <strong>Console</strong> tab
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                Look for these messages:
+                <ul style="margin-top: 10px; margin-left: 50px;">
+                    <li>✅ "Admin access button found!"</li>
+                    <li>✅ "Gallery management system initialized"</li>
+                </ul>
+            </div>
+            <div class="step">
+                <span class="step-number">4</span>
+                If you see <span class="error">❌ red errors</span>, copy them and let me know
+            </div>
+        </div>
+        
+        <!-- Step 5: Live Test -->
+        <div class="section">
+            <h2>Step 5: Test in Live Frame</h2>
+            <p>Your actual website loaded below. Try clicking the orange gear button:</p>
+            <button class="btn" onclick="loadSite()">🌐 Load Website</button>
+            <div class="iframe-container" style="display:none;" id="iframe-container">
+                <iframe id="site-frame" src=""></iframe>
+            </div>
+        </div>
+        
+        <!-- Quick Fixes -->
+        <div class="section">
+            <h2>⚡ Quick Fixes to Try</h2>
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Hard Refresh:</strong> Press <code>Ctrl + F5</code> on index.html
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Open Console & Type:</strong> <code>openAdminPanel()</code> and press Enter
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Keyboard Shortcut:</strong> Press <code>Ctrl + Shift + A</code> on your website
+            </div>
+            <div class="step">
+                <span class="step-number">4</span>
+                <strong>Clear Cache:</strong> Settings → Privacy → Clear browsing data
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function checkElements() {
+            const result = document.getElementById('elements-result');
+            result.style.display = 'block';
+            
+            let output = '🔍 Checking HTML Elements...\n\n';
+            
+            // Open index.html in hidden iframe to check
+            const frame = document.createElement('iframe');
+            frame.style.display = 'none';
+            frame.src = 'index.html';
+            document.body.appendChild(frame);
+            
+            frame.onload = () => {
+                const doc = frame.contentDocument;
+                
+                const adminBtn = doc.getElementById('admin-access-btn');
+                const adminPanel = doc.getElementById('admin-panel');
+                const adminClose = doc.getElementById('admin-close-btn');
+                const adminOverlay = doc.getElementById('admin-overlay');
+                
+                output += adminBtn ? '✅ Admin Button: FOUND\n' : '❌ Admin Button: NOT FOUND\n';
+                output += adminPanel ? '✅ Admin Panel: FOUND\n' : '❌ Admin Panel: NOT FOUND\n';
+                output += adminClose ? '✅ Close Button: FOUND\n' : '❌ Close Button: NOT FOUND\n';
+                output += adminOverlay ? '✅ Overlay: FOUND\n' : '❌ Overlay: NOT FOUND\n';
+                
+                if (adminBtn) {
+                    const styles = window.getComputedStyle(adminBtn);
+                    output += '\n📊 Button Styles:\n';
+                    output += `   Display: ${styles.display}\n`;
+                    output += `   Position: ${styles.position}\n`;
+                    output += `   Z-Index: ${styles.zIndex}\n`;
+                    output += `   Bottom: ${styles.bottom}\n`;
+                    output += `   Right: ${styles.right}\n`;
+                }
+                
+                result.innerHTML = output;
+                result.className = 'result ' + (adminBtn && adminPanel ? 'success' : 'error');
+                
+                document.body.removeChild(frame);
+            };
+        }
+        
+        function checkEventListeners() {
+            const result = document.getElementById('listeners-result');
+            result.style.display = 'block';
+            
+            let output = '⚡ Checking Event Listeners...\n\n';
+            
+            const frame = document.createElement('iframe');
+            frame.style.display = 'none';
+            frame.src = 'index.html';
+            document.body.appendChild(frame);
+            
+            frame.onload = () => {
+                const doc = frame.contentDocument;
+                const win = frame.contentWindow;
+                
+                output += '✅ script.js loaded\n';
+                
+                // Check if functions exist
+                if (typeof win.openAdminPanel === 'function') {
+                    output += '✅ openAdminPanel() function: EXISTS\n';
+                } else {
+                    output += '❌ openAdminPanel() function: NOT FOUND\n';
+                }
+                
+                if (typeof win.closeAdminPanel === 'function') {
+                    output += '✅ closeAdminPanel() function: EXISTS\n';
+                } else {
+                    output += '❌ closeAdminPanel() function: NOT FOUND\n';
+                }
+                
+                const adminBtn = doc.getElementById('admin-access-btn');
+                if (adminBtn) {
+                    output += '\n🎯 Testing Click Event:\n';
+                    try {
+                        adminBtn.click();
+                        const panel = doc.getElementById('admin-panel');
+                        if (panel && panel.classList.contains('active')) {
+                            output += '✅ Click test PASSED - Panel opened!\n';
+                        } else {
+                            output += '❌ Click test FAILED - Panel did not open\n';
+                        }
+                    } catch (e) {
+                        output += `❌ Error during click: ${e.message}\n`;
+                    }
+                }
+                
+                result.innerHTML = output;
+                document.body.removeChild(frame);
+            };
+        }
+        
+        function manualOpen() {
+            const result = document.getElementById('manual-result');
+            result.style.display = 'block';
+            
+            window.open('index.html', '_blank');
+            
+            result.innerHTML = `
+🪟 Website opened in new tab!
+
+Try these in the NEW TAB:
+
+1. Look for the orange gear button (⚙️)
+2. Click it
+3. If nothing happens, press F12 and type:
+   openAdminPanel()
+
+4. Or press: Ctrl + Shift + A
+
+If it works in the new tab, the issue is browser cache.
+Close the new tab and do a hard refresh on your original tab: Ctrl + F5
+            `;
+        }
+        
+        function openInNewWindow() {
+            window.open('index.html', 'admin_test', 'width=1200,height=800');
+            
+            const result = document.getElementById('manual-result');
+            result.style.display = 'block';
+            result.innerHTML = '🪟 Website opened in popup window!\n\nTry clicking the orange gear button in the popup.';
+        }
+        
+        function loadSite() {
+            const container = document.getElementById('iframe-container');
+            const frame = document.getElementById('site-frame');
+            
+            frame.src = 'index.html';
+            container.style.display = 'block';
+            
+            setTimeout(() => {
+                container.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+    </script>
+</body>
+</html>
