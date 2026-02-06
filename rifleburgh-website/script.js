@@ -546,19 +546,22 @@ class GalleryManager {
     }
     
     loadImages() {
-        const stored = localStorage.getItem(this.storageKey);
-        if (stored) {
-            this.images = JSON.parse(stored);
-        }
-        
-        // If no images in localStorage, use default images from HTML
-        if (this.images.length === 0) {
-            const existingSlides = this.track.querySelectorAll('.carousel-slide img');
+        // Always prioritize static HTML images over localStorage
+        const existingSlides = this.track.querySelectorAll('.carousel-slide img');
+        if (existingSlides.length > 0) {
             existingSlides.forEach(img => {
                 if (img.src && !img.src.includes('placeholder')) {
                     this.images.push(img.src);
                 }
             });
+            console.log(`✅ Loaded ${this.images.length} static images for ${this.galleryId}`);
+        } else {
+            // Fallback to localStorage if no HTML images exist
+            const stored = localStorage.getItem(this.storageKey);
+            if (stored) {
+                this.images = JSON.parse(stored);
+                console.log(`📦 Loaded ${this.images.length} images from localStorage for ${this.galleryId}`);
+            }
         }
         
         this.renderCarousel();
@@ -1102,16 +1105,9 @@ if (apptDateInput) {
 }
 
 // Load all saved customizations on page load
+// NOTE: Now using static images in HTML, localStorage customization disabled for production
 window.addEventListener('DOMContentLoaded', () => {
-    // About photo
-    const storedPhoto = localStorage.getItem('aboutPhoto');
-    const aboutPhoto = document.getElementById('about-photo');
-    
-    if (storedPhoto && aboutPhoto) {
-        aboutPhoto.src = storedPhoto;
-    }
-    
-    // About text
+    // About text editing (keep this functionality)
     const storedText = localStorage.getItem('aboutText');
     const aboutText = document.getElementById('about-text');
     
@@ -1119,16 +1115,10 @@ window.addEventListener('DOMContentLoaded', () => {
         aboutText.innerHTML = storedText;
     }
     
-    // Custom logo
-    updateLogo();
-    
-    // Hero background
-    updateHeroBackground();
-    
-    // Hero text
+    // Hero text editing (keep this functionality)
     updateHeroText();
     
-    console.log('✅ All customizations loaded from localStorage');
+    console.log('✅ Static images loaded from files, localStorage customization disabled');
 });
 
 // About Text Editing
@@ -1183,230 +1173,96 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ================================================
-// BEFORE & AFTER SLIDER
+// BEFORE & AFTER NAVIGATION (Static Images)
 // ================================================
 
-class BeforeAfterSlider {
+class BeforeAfterNavigator {
     constructor() {
-        this.beforeAfterSets = [];
+        this.sets = document.querySelectorAll('.ba-set');
         this.currentIndex = 0;
-        this.loadSets();
-        this.initializeSliders();
-        this.renderNavigation();
+        this.initializeNavigation();
     }
     
-    loadSets() {
-        const stored = localStorage.getItem('beforeAfterSets');
-        if (stored) {
-            this.beforeAfterSets = JSON.parse(stored);
-        }
-        
-        // Start with empty sets - no default images
-        console.log('📊 Loaded', this.beforeAfterSets.length, 'before/after sets from storage');
-    }
-    
-    saveSets() {
-        try {
-            localStorage.setItem('beforeAfterSets', JSON.stringify(this.beforeAfterSets));
-            console.log('💾 Before/after sets saved successfully');
-        } catch (error) {
-            if (error.name === 'QuotaExceededException') {
-                console.error('❌ Storage quota exceeded!', error);
-                alert('⚠️ Storage Full!\n\nYour browser storage is full. Please:\n\n1. Delete some other before/after sets\n2. Delete unused gallery images\n3. Or use smaller image files\n\nCurrent sets were NOT saved.');
-                throw error;
-            } else {
-                console.error('❌ Error saving sets:', error);
-                throw error;
-            }
-        }
-    }
-    
-    initializeSliders() {
-        this.renderCurrentSet();
-        this.attachSliderEvents();
-    }
-    
-    renderCurrentSet() {
-        const container = document.getElementById('before-after-container');
-        if (!container) {
-            console.log('❌ before-after-container not found');
+    initializeNavigation() {
+        if (this.sets.length === 0) {
+            console.log('⚠️ No before/after sets found');
             return;
         }
         
-        // If no sets, show empty state
-        if (this.beforeAfterSets.length === 0) {
-            container.innerHTML = `
-                <div class="before-after-empty-state">
-                    <div class="empty-state-icon">📸</div>
-                    <h3>No Before & After Photos Yet</h3>
-                    <p>Upload your first transformation using the admin panel.</p>
-                    <p class="empty-state-hint">Click the gear icon in the bottom right to get started!</p>
-                </div>
-            `;
-            console.log('ℹ️ No before/after sets - showing empty state');
-            return;
-        }
+        // Show first set
+        this.showSet(0);
         
-        const set = this.beforeAfterSets[this.currentIndex];
-        if (!set) {
-            console.log('❌ No set at index', this.currentIndex);
-            return;
-        }
-        
-        console.log('🔄 Rendering before/after set', this.currentIndex + 1, 'of', this.beforeAfterSets.length);
-        
-        container.innerHTML = `
-            <div class="before-after-comparison">
-                <div class="comparison-image before">
-                    <img src="${set.before}" alt="Before">
-                    <span class="image-label">BEFORE</span>
-                </div>
-                <div class="comparison-image after">
-                    <img src="${set.after}" alt="After">
-                    <span class="image-label">AFTER</span>
-                </div>
-            </div>
-            ${set.description ? `<div class="before-after-description">${set.description}</div>` : ''}
-        `;
-        
-        console.log('✅ Before/After set rendered (side-by-side)');
-    }
-    
-    attachSliderEvents() {
-        // No longer needed - using simple side-by-side layout
-        // Keeping method for compatibility
-    }
-    
-    renderNavigation() {
+        // Setup navigation buttons
         const prevBtn = document.getElementById('ba-prev');
         const nextBtn = document.getElementById('ba-next');
-        const dotsContainer = document.getElementById('ba-dots');
+        const dots = document.querySelectorAll('.ba-dot');
         
-        if (!prevBtn || !nextBtn || !dotsContainer) return;
+        if (prevBtn) prevBtn.onclick = () => this.previousSet();
+        if (nextBtn) nextBtn.onclick = () => this.nextSet();
         
-        // Hide navigation if no sets
-        if (this.beforeAfterSets.length === 0) {
-            dotsContainer.innerHTML = '';
-            prevBtn.style.display = 'none';
-            nextBtn.style.display = 'none';
-            return;
-        }
-        
-        // Show navigation
-        prevBtn.style.display = 'block';
-        nextBtn.style.display = 'block';
-        
-        // Render dots
-        dotsContainer.innerHTML = '';
-        this.beforeAfterSets.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.className = `ba-dot ${index === this.currentIndex ? 'active' : ''}`;
-            dot.addEventListener('click', () => this.goToSet(index));
-            dotsContainer.appendChild(dot);
+        dots.forEach((dot, index) => {
+            dot.onclick = () => this.goToSet(index);
         });
         
-        // Navigation buttons
-        prevBtn.onclick = () => this.previousSet();
-        nextBtn.onclick = () => this.nextSet();
-        
-        // Update button states
-        prevBtn.disabled = this.currentIndex === 0;
-        nextBtn.disabled = this.currentIndex === this.beforeAfterSets.length - 1;
+        this.updateNavigation();
+        console.log(`✅ Before/After navigator initialized with ${this.sets.length} sets`);
+    }
+    
+    showSet(index) {
+        this.sets.forEach((set, i) => {
+            if (i === index) {
+                set.classList.add('active');
+                set.style.display = 'grid';
+            } else {
+                set.classList.remove('active');
+                set.style.display = 'none';
+            }
+        });
+        this.currentIndex = index;
+        this.updateNavigation();
     }
     
     goToSet(index) {
-        this.currentIndex = index;
-        this.renderCurrentSet();
-        this.renderNavigation();
+        if (index >= 0 && index < this.sets.length) {
+            this.showSet(index);
+        }
     }
     
     previousSet() {
         if (this.currentIndex > 0) {
-            this.currentIndex--;
-            this.renderCurrentSet();
-            this.renderNavigation();
+            this.showSet(this.currentIndex - 1);
         }
     }
     
     nextSet() {
-        if (this.currentIndex < this.beforeAfterSets.length - 1) {
-            this.currentIndex++;
-            this.renderCurrentSet();
-            this.renderNavigation();
+        if (this.currentIndex < this.sets.length - 1) {
+            this.showSet(this.currentIndex + 1);
         }
     }
     
-    addSet(beforeImg, afterImg, description) {
-        console.log('➕ Adding new before/after set');
+    updateNavigation() {
+        const prevBtn = document.getElementById('ba-prev');
+        const nextBtn = document.getElementById('ba-next');
+        const dots = document.querySelectorAll('.ba-dot');
         
-        // Check limit (3 sets max to save storage)
-        if (this.beforeAfterSets.length >= 3) {
-            alert('⚠️ Maximum 3 before/after sets reached.\n\nPlease delete some sets before adding more to avoid storage issues.');
-            return false;
-        }
+        // Update button states
+        if (prevBtn) prevBtn.disabled = this.currentIndex === 0;
+        if (nextBtn) nextBtn.disabled = this.currentIndex === this.sets.length - 1;
         
-        // Add the set temporarily
-        const newSet = {
-            before: beforeImg,
-            after: afterImg,
-            description: description || ''
-        };
-        
-        this.beforeAfterSets.push(newSet);
-        
-        // Try to save - if it fails due to quota, remove the set
-        try {
-            this.saveSets();
-            this.currentIndex = this.beforeAfterSets.length - 1;
-            
-            console.log('📊 Total sets now:', this.beforeAfterSets.length);
-            console.log('📍 Current index:', this.currentIndex);
-            
-            this.renderCurrentSet();
-            this.renderNavigation();
-            
-            console.log('✅ Before/After set added successfully');
-            return true;
-        } catch (error) {
-            // Remove the set if save failed
-            this.beforeAfterSets.pop();
-            console.error('❌ Failed to add set, rolled back');
-            return false;
-        }
-    }
-    
-    deleteSet(index) {
-        console.log('🗑️ Deleting before/after set at index', index);
-        console.log('📊 Sets before delete:', this.beforeAfterSets.length);
-        
-        this.beforeAfterSets.splice(index, 1);
-        
-        if (this.currentIndex >= this.beforeAfterSets.length) {
-            this.currentIndex = Math.max(0, this.beforeAfterSets.length - 1);
-        }
-        
-        console.log('📊 Sets after delete:', this.beforeAfterSets.length);
-        console.log('📍 New current index:', this.currentIndex);
-        
-        this.saveSets();
-        console.log('💾 Sets saved to localStorage');
-        
-        if (this.beforeAfterSets.length === 0) {
-            console.log('⚠️ No sets left - section will be hidden');
-        }
-        
-        console.log('🔄 Rendering updated slider...');
-        this.renderCurrentSet();
-        this.renderNavigation();
-        
-        console.log('✅ Before/After set deleted and slider updated');
+        // Update dots
+        dots.forEach((dot, index) => {
+            if (index === this.currentIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
     }
 }
 
-// Initialize before/after slider and make it globally accessible
-const beforeAfterSlider = new BeforeAfterSlider();
-window.beforeAfterSlider = beforeAfterSlider;
-console.log('✅ BeforeAfterSlider initialized with', beforeAfterSlider.beforeAfterSets.length, 'sets');
+// Initialize before/after navigator
+const beforeAfterNav = new BeforeAfterNavigator();
+window.beforeAfterNav = beforeAfterNav;
 
 // ================================================
 // LOGO CUSTOMIZATION

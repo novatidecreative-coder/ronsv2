@@ -160,19 +160,8 @@
             <div class="header-content">
                 <!-- Logo -->
                 <div class="logo">
-                    <!-- Custom Logo Image (hidden by default, shows when uploaded) -->
-                    <img id="custom-logo" class="custom-logo-img" src="" alt="Company Logo" style="display: none;">
-                    
-                    <!-- Default SVG Logo (shows when no custom logo) -->
-                    <svg class="logo-icon" id="default-logo" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Circular background -->
-                        <circle cx="25" cy="25" r="23" fill="#2d5016" stroke="#4a7c2c" stroke-width="2"/>
-                        <!-- Tree/leaf design -->
-                        <path d="M 25 12 Q 20 17 20 22 Q 20 25 22 27 L 25 38 L 28 27 Q 30 25 30 22 Q 30 17 25 12 Z" fill="#fff"/>
-                        <circle cx="25" cy="22" r="3" fill="#4a7c2c"/>
-                        <!-- Letter R -->
-                        <text x="25" y="33" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#e8dcc4" text-anchor="middle">R</text>
-                    </svg>
+                    <!-- Custom Logo Image -->
+                    <img id="custom-logo" class="custom-logo-img" src="images/logo.png" alt="Company Logo">
                     <span class="logo-text" id="logo-text">Rifenburgh Landscaping</span>
                 </div>
                 
@@ -201,9 +190,8 @@
     <!-- ================================
          HERO SECTION
          ================================ -->
-    <section class="hero" id="home">
+    <section class="hero" id="home" style="background-image: url('images/hero-background.jpg');">
         <div class="hero-overlay" id="hero-overlay"></div>
-        <div class="hero-background" id="hero-background"></div>
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title" id="hero-title">Professional Landscaping Services in Germantown, NY</h1>
@@ -388,7 +376,6 @@
             <div class="carousel-container">
                 <div class="carousel" id="land-clearing-carousel">
                     <div class="carousel-track" id="land-clearing-track">
-                        <!-- Default images - will be replaced by uploaded images -->
                         <div class="carousel-slide">
                             <img src="images/land-clearing-1.jpg" alt="Land clearing work" loading="lazy">
                         </div>
@@ -397,6 +384,9 @@
                         </div>
                         <div class="carousel-slide">
                             <img src="images/land-clearing-3.jpg" alt="Completed land clearing" loading="lazy">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="images/land-clearing-4.jpg" alt="Land clearing service" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -428,15 +418,20 @@
             <div class="carousel-container">
                 <div class="carousel" id="land-striping-carousel">
                     <div class="carousel-track" id="land-striping-track">
-                        <!-- Default images -->
                         <div class="carousel-slide">
-                            <img src="images/mowing-1.jpg" alt="Professional lawn striping" loading="lazy">
+                            <img src="images/land-striping-1.jpg" alt="Professional lawn striping" loading="lazy">
                         </div>
                         <div class="carousel-slide">
-                            <img src="images/mowing-2.jpg" alt="Beautifully striped lawn" loading="lazy">
+                            <img src="images/land-striping-2.jpg" alt="Beautifully striped lawn" loading="lazy">
                         </div>
                         <div class="carousel-slide">
-                            <img src="images/mowing-3.jpg" alt="Commercial lawn striping" loading="lazy">
+                            <img src="images/land-striping-3.jpg" alt="Commercial lawn striping" loading="lazy">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="images/land-striping-4.jpg" alt="Lawn striping service" loading="lazy">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="images/land-striping-5.jpg" alt="Professional lawn mowing" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -467,13 +462,9 @@
                 <!-- Owner Photo -->
                 <div class="about-photo-container">
                     <img id="about-photo" 
-                         src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=500&fit=crop" 
+                         src="images/about-owner.jpg" 
                          alt="Business Owner" 
                          class="about-photo">
-                    <div class="photo-placeholder" id="photo-placeholder">
-                        <span>📷</span>
-                        <p>Click to upload photo</p>
-                    </div>
                 </div>
                 
                 <!-- About Text (Editable) -->
@@ -497,28 +488,53 @@
             <h2 class="section-title">Before & After Transformations</h2>
             <p class="section-subtitle">See the dramatic difference our professional landscaping services make</p>
             
-            <!-- Before/After Slider Container -->
+            <!-- Before/After Comparisons -->
             <div class="before-after-container" id="before-after-container">
-                <!-- Default before/after example -->
-                <div class="before-after-slider">
-                    <div class="before-after-images">
-                        <div class="before-image">
-                            <img src="images/land-clearing-1.jpg" alt="Before landscaping" id="before-img-0">
-                            <span class="image-label">BEFORE</span>
+                <!-- Set 1 -->
+                <div class="before-after-comparison ba-set active">
+                    <div class="comparison-side">
+                        <div class="comparison-image">
+                            <img src="images/before-1.jpg" alt="Before landscaping">
                         </div>
-                        <div class="after-image">
-                            <img src="images/land-clearing-2.jpg" alt="After landscaping" id="after-img-0">
-                            <span class="image-label">AFTER</span>
-                        </div>
-                        <div class="slider-handle" id="slider-handle-0">
-                            <div class="slider-button">
-                                <span>←</span>
-                                <span>→</span>
-                            </div>
-                        </div>
+                        <span class="comparison-label">BEFORE</span>
                     </div>
-                    <div class="before-after-description" id="description-0">
-                        <p>Complete land clearing and restoration project</p>
+                    <div class="comparison-side">
+                        <div class="comparison-image">
+                            <img src="images/after-1.jpg" alt="After landscaping">
+                        </div>
+                        <span class="comparison-label">AFTER</span>
+                    </div>
+                </div>
+                
+                <!-- Set 2 -->
+                <div class="before-after-comparison ba-set">
+                    <div class="comparison-side">
+                        <div class="comparison-image">
+                            <img src="images/before-2.jpg" alt="Before landscaping">
+                        </div>
+                        <span class="comparison-label">BEFORE</span>
+                    </div>
+                    <div class="comparison-side">
+                        <div class="comparison-image">
+                            <img src="images/after-2.jpg" alt="After landscaping">
+                        </div>
+                        <span class="comparison-label">AFTER</span>
+                    </div>
+                </div>
+                
+                <!-- Set 3 -->
+                <div class="before-after-comparison ba-set">
+                    <div class="comparison-side">
+                        <div class="comparison-image">
+                            <img src="images/before-3.jpg" alt="Before landscaping">
+                        </div>
+                        <span class="comparison-label">BEFORE</span>
+                    </div>
+                    <div class="comparison-side">
+                        <div class="comparison-image">
+                            <img src="images/after-3.jpg" alt="After landscaping">
+                        </div>
+                        <span class="comparison-label">AFTER</span>
                     </div>
                 </div>
             </div>
@@ -526,7 +542,11 @@
             <!-- Navigation for multiple before/afters -->
             <div class="before-after-nav">
                 <button class="ba-nav-btn ba-prev" id="ba-prev">← Previous</button>
-                <div class="ba-dots" id="ba-dots"></div>
+                <div class="ba-dots" id="ba-dots">
+                    <span class="ba-dot active" data-index="0"></span>
+                    <span class="ba-dot" data-index="1"></span>
+                    <span class="ba-dot" data-index="2"></span>
+                </div>
                 <button class="ba-nav-btn ba-next" id="ba-next">Next →</button>
             </div>
         </div>
@@ -544,11 +564,20 @@
             <div class="carousel-container">
                 <div class="carousel" id="backyard-carousel">
                     <div class="carousel-track" id="backyard-track">
-                        <!-- Placeholder images - will be replaced by uploads -->
                         <div class="carousel-slide">
-                            <div class="placeholder-slide">
-                                <p>Upload backyard restoration photos to showcase your transformations</p>
-                            </div>
+                            <img src="images/backyard-1.jpg" alt="Backyard restoration" loading="lazy">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="images/backyard-2.jpg" alt="Backyard transformation" loading="lazy">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="images/backyard-3.jpg" alt="Restored backyard" loading="lazy">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="images/backyard-4.jpg" alt="Backyard landscaping" loading="lazy">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="images/backyard-5.jpg" alt="Beautiful backyard" loading="lazy">
                         </div>
                     </div>
                 </div>
