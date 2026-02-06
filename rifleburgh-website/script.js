@@ -830,6 +830,11 @@ console.log('Admin Panel Elements:', {
     overlay: adminOverlay
 });
 
+// Admin panel access DISABLED for production
+// Content is now locked and cannot be modified by visitors
+// To re-enable admin panel, uncomment the code below and the button in index.html
+
+/*
 // Open admin panel
 if (adminAccessBtn) {
     console.log('✅ Admin access button found! Attaching click listener...');
@@ -853,6 +858,9 @@ if (adminAccessBtn) {
 } else {
     console.error('❌ Admin access button not found in DOM');
 }
+*/
+
+console.log('🔒 Admin panel disabled - Content locked for production');
 
 // Close admin panel
 if (adminCloseBtn) {
@@ -1972,6 +1980,21 @@ function warnIfStorageFull() {
 // MANUAL ADMIN PANEL OPENER (BACKUP METHOD)
 // ================================================
 
+// ================================================
+// ADMIN PANEL ACCESS DISABLED FOR PRODUCTION
+// ================================================
+// All admin functionality is now disabled to prevent visitors
+// from accessing or modifying your uploaded content.
+// Your images, text, and customizations are now locked in.
+//
+// TO RE-ENABLE ADMIN PANEL FOR UPDATES:
+// 1. Uncomment the admin button in index.html (line ~1142)
+// 2. Uncomment the code below
+// 3. Make your changes
+// 4. Re-comment everything before pushing to live site
+// ================================================
+
+/*
 // Global function to open admin panel manually (for debugging)
 window.openAdminPanel = function() {
     console.log('📂 Manual admin panel opener called');
@@ -2008,17 +2031,19 @@ document.addEventListener('keydown', (e) => {
         window.openAdminPanel();
     }
 });
+*/
+
+console.log('🔒 Admin panel locked - Visitors cannot modify content');
 
 // ================================================
 // INITIALIZATION
 // ================================================
 
 // Log to console when script loads successfully
-console.log('Rifenburgh Landscaping website loaded successfully! 🌿');
-console.log('Gallery management system initialized');
-console.log('💡 TIP: If admin button doesn\'t work, try:');
-console.log('   1. Type openAdminPanel() in console');
-console.log('   2. Press Ctrl+Shift+A');
+console.log('🌿 Rifenburgh Landscaping website loaded successfully!');
+console.log('📸 Gallery system initialized');
+console.log('📧 Formspree integration active');
+console.log('🔒 Admin panel disabled - Content locked for production');
 
 // Optional: Add analytics tracking here
 // Example: Google Analytics, Facebook Pixel, etc.
