@@ -419,6 +419,71 @@ ul {
 }
 
 /* ================================================
+   PRIORITY SERVICES BAR
+   ================================================ */
+
+.priority-services-bar {
+    background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
+    padding: 24px 0;
+    color: #fff;
+    text-align: center;
+}
+
+.priority-tagline {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    opacity: 0.95;
+}
+
+.priority-services-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px 32px;
+    margin-bottom: 16px;
+}
+
+.priority-service {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.priority-icon {
+    font-size: 1.2rem;
+}
+
+.priority-cta {
+    display: inline-block;
+    color: #e8dcc4;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.priority-cta:hover {
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .priority-services-bar {
+        padding: 20px 0;
+    }
+    .priority-services-list {
+        gap: 12px 16px;
+    }
+    .priority-service {
+        font-size: 0.9rem;
+    }
+    .priority-tagline {
+        font-size: 0.85rem;
+    }
+}
+
+/* ================================================
    QUOTE FORM SECTION
    ================================================ */
 
@@ -554,6 +619,10 @@ ul {
     text-align: center;
     transition: all 0.3s ease;
     border: 2px solid transparent;
+}
+
+.service-card-priority {
+    border-left: 4px solid #4a7c2c;
 }
 
 .service-card:hover {

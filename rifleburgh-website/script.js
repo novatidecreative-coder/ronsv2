@@ -491,7 +491,7 @@ function getBotResponse(message) {
         return "We're open Monday-Friday 9am-5pm, and Saturday 10am-2pm. You can call us at (518) 751-8232 during business hours, or leave a message anytime!";
     }
     else if (message.includes('service') || message.includes('do you')) {
-        return "We offer lawn mowing & maintenance, professional striping, land clearing, tree trimming, seasonal cleanups, and more! Check out our services section above, or call (518) 751-8232 to discuss your specific needs.";
+        return "We offer lawn mowing, snow removal, brush hogging, caretaking, professional striping, land clearing, tree trimming, seasonal cleanups, and more! Family-owned for 26 years. Call (518) 751-8232 to discuss your specific needs.";
     }
     else if (message.includes('area') || message.includes('location') || message.includes('where')) {
         return "We proudly serve Germantown, Hudson, Red Hook, Rhinebeck, Tivoli, Clermont, and surrounding Hudson Valley areas. Call us at (518) 751-8232 to confirm we serve your location!";
@@ -1445,8 +1445,8 @@ const saveHeroTextBtn = document.getElementById('save-hero-text-btn');
 const resetHeroTextBtn = document.getElementById('reset-hero-text-btn');
 
 // Default hero text
-const defaultHeroTitle = "Professional Landscaping Services in Germantown, NY";
-const defaultHeroSubtitle = "Expert lawn care, mowing, striping, and land clearing services. Serving Germantown, Hudson, Red Hook & surrounding areas. Family-owned, reliable, and trusted by local homeowners.";
+const defaultHeroTitle = "Lawn Mowing, Snow Removal, Brush Hogging & Caretaking in Germantown, NY";
+const defaultHeroSubtitle = "Family-owned for 26 years. Expert lawn mowing, snow removal, brush hogging, caretaking, striping, and land clearing. Serving Germantown, Hudson, Red Hook & surrounding areas—reliable and trusted by local homeowners.";
 
 if (saveHeroTextBtn) {
     saveHeroTextBtn.addEventListener('click', () => {
