@@ -712,11 +712,13 @@ class GalleryManager {
 const landClearingGallery = new GalleryManager('land-clearing', 'landClearingImages');
 const landStripingGallery = new GalleryManager('land-striping', 'landStripingImages');
 const backyardGallery = new GalleryManager('backyard', 'backyardImages');
+const snowPlowingGallery = new GalleryManager('snow-plowing', 'snowPlowingImages');
 
 // Enable pause on hover for all galleries
 landClearingGallery.pauseOnHover();
 landStripingGallery.pauseOnHover();
 backyardGallery.pauseOnHover();
+snowPlowingGallery.pauseOnHover();
 
 // ================================================
 // CAROUSEL NAVIGATION BUTTONS
@@ -729,9 +731,11 @@ document.querySelectorAll('.carousel-btn-prev').forEach(btn => {
         if (carouselType === 'land-clearing') {
             landClearingGallery.prevSlide();
         } else if (carouselType === 'land-striping') {
-            landStripingGallery.prevSlide();
+            landStripingGallery.nextSlide();
         } else if (carouselType === 'backyard') {
             backyardGallery.prevSlide();
+        } else if (carouselType === 'snow-plowing') {
+            snowPlowingGallery.prevSlide();
         }
     });
 });
@@ -746,6 +750,8 @@ document.querySelectorAll('.carousel-btn-next').forEach(btn => {
             landStripingGallery.nextSlide();
         } else if (carouselType === 'backyard') {
             backyardGallery.nextSlide();
+        } else if (carouselType === 'snow-plowing') {
+            snowPlowingGallery.nextSlide();
         }
     });
 });
@@ -1164,11 +1170,13 @@ document.addEventListener('keydown', (e) => {
         landClearingGallery.prevSlide();
         landStripingGallery.prevSlide();
         backyardGallery.prevSlide();
+        snowPlowingGallery.prevSlide();
     } else if (e.key === 'ArrowRight') {
         // Navigate all carousels forward
         landClearingGallery.nextSlide();
         landStripingGallery.nextSlide();
         backyardGallery.nextSlide();
+        snowPlowingGallery.nextSlide();
     }
 });
 
