@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
- "scripts": {
-  "start": "node server.js"
-}
-,
+  "scripts": {
+    "start": "node server.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/novatidecreative-coder/ronsv2.git"
@@ -20,6 +19,7 @@
   },
   "homepage": "https://github.com/novatidecreative-coder/ronsv2#readme",
   "dependencies": {
+    "@vercel/analytics": "^1.6.1",
     "express": "^5.2.1"
   }
 }
