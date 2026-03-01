@@ -1,0 +1,64 @@
+# Vercel Web Analytics Implementation
+
+## Summary
+Successfully implemented Vercel Web Analytics for the Rifenburgh Landscaping website.
+
+## Changes Made
+
+### Modified Files:
+- **index.html** - Added Vercel Web Analytics script tags
+
+## Implementation Details
+
+Since this is a plain HTML website (not using a JavaScript framework like Next.js, React, Vue, etc.), I implemented the HTML-based approach as outlined in the Vercel Web Analytics documentation.
+
+### What was added:
+Added the following code snippet just before the closing `</head>` tag in index.html:
+
+```html
+<!-- Vercel Web Analytics -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+```
+
+## How it works
+
+1. The first script initializes the `window.va` function and creates a queue (`window.vaq`) to store analytics calls before the main script loads
+2. The second script loads the Vercel analytics tracking script asynchronously using the `defer` attribute
+3. Once deployed to Vercel with Web Analytics enabled in the dashboard, the script at `/_vercel/insights/script.js` will be automatically served
+4. The analytics will start tracking page views and visitor data
+
+## Next Steps
+
+To complete the setup:
+
+1. **Enable Web Analytics in Vercel Dashboard**:
+   - Go to the Vercel dashboard
+   - Select the Rifenburgh Landscaping project
+   - Click the "Analytics" tab
+   - Click "Enable" to activate Web Analytics
+
+2. **Deploy the changes**:
+   - Deploy this update to Vercel
+   - The analytics routes will be available at `/_vercel/insights/*`
+
+3. **Verify the implementation**:
+   - After deployment, visit the website
+   - Open browser Developer Tools → Network tab
+   - Look for a Fetch/XHR request to `/_vercel/insights/view`
+   - If the request appears, analytics is working correctly
+
+4. **View analytics data**:
+   - Return to the Vercel dashboard
+   - Select your project
+   - Click the "Analytics" tab
+   - Data will start appearing after visitors access the site
+
+## Notes
+
+- No package installation was required since this is a plain HTML site (no npm/pnpm/yarn dependencies)
+- The implementation uses the HTML script approach, which means there is no automatic route support, but it will track all page views
+- The analytics script is loaded with the `defer` attribute, ensuring it doesn't block page rendering
+- All visitor data is collected in compliance with privacy standards as documented by Vercel
