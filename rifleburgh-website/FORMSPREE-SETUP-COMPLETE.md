@@ -3,20 +3,20 @@
 ## 📧 Your Email Setup
 
 **Business Email**: rifenburgh12345@gmail.com  
-**Formspree Endpoint**: https://formspree.io/f/xdalnyeg  
-**Endpoint ID**: xdalnyeg
+**Formspree Endpoint**: https://formspree.io/f/xjgajryb  
+**Endpoint ID**: xjgajryb
 
 ---
 
 ## ✅ Changes Made
 
 ### 1. **index.html** - Quote Request Form
-✅ Added `action="https://formspree.io/f/xdalnyeg"`  
+✅ Added `action="https://formspree.io/f/xjgajryb"`  
 ✅ Added `method="POST"`  
 ✅ Verified all field `name` attributes
 
 ### 2. **index.html** - Appointment Form
-✅ Added `action="https://formspree.io/f/xdalnyeg"`  
+✅ Added `action="https://formspree.io/f/xjgajryb"`  
 ✅ Added `method="POST"`  
 ✅ Verified all field `name` attributes
 
@@ -201,7 +201,7 @@ We'll contact you shortly to confirm your preferred date and time.
 
 1. **Go to**: https://formspree.io/
 2. **Log in** with your account
-3. **Select your form**: xdalnyeg
+3. **Select your form**: xjgajryb
 
 ### What You Can See
 
@@ -408,7 +408,7 @@ Every form submission will arrive in your inbox within seconds!
 ## 📚 Additional Resources
 
 - **Formspree Docs**: https://help.formspree.io/
-- **Dashboard**: https://formspree.io/forms/xdalnyeg
+- **Dashboard**: https://formspree.io/forms/xjgajryb
 - **Upgrade Plans**: https://formspree.io/plans
 - **Status Page**: https://status.formspree.io/
 
@@ -427,5 +427,5 @@ If something isn't working:
 ---
 
 *Setup completed: February 5, 2026*  
-*Integration: Formspree (xdalnyeg)*  
+*Integration: Formspree (xjgajryb)*  
 *Forms: Quote Request + Appointment Booking*

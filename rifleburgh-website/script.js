@@ -219,7 +219,7 @@ if (quoteForm) {
             
             try {
                 // Submit to Formspree
-                const response = await fetch('https://formspree.io/f/xdalnyeg', {
+                const response = await fetch('https://formspree.io/f/xjgajryb', {
                     method: 'POST',
                     body: formData,
                     headers: {
@@ -1541,7 +1541,7 @@ if (appointmentForm) {
             const formData = new FormData(appointmentForm);
             
             // Submit to Formspree
-            const response = await fetch('https://formspree.io/f/xdalnyeg', {
+            const response = await fetch('https://formspree.io/f/xjgajryb', {
                 method: 'POST',
                 body: formData,
                 headers: {
