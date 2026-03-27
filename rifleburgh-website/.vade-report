@@ -1,0 +1,58 @@
+# Vercel Web Analytics Implementation
+
+## Summary
+Successfully implemented Vercel Web Analytics tracking script across all HTML pages in the Rifenburgh Landscaping website.
+
+## Changes Made
+
+### Modified Files:
+1. **index.html** - Main website page
+2. **diagnose-admin.html** - Admin diagnostic tool page
+3. **export-images.html** - Image export utility page
+4. **test-admin.html** - Admin button test page
+
+### Implementation Details:
+Added the Vercel Web Analytics tracking script to the `<head>` section of all HTML files, just before the closing `</head>` tag.
+
+The script includes:
+- Initialization of the `window.va` tracking function
+- Deferred loading of the Vercel insights script from `/_vercel/insights/script.js`
+
+### Code Added:
+```html
+<!-- Vercel Web Analytics -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+```
+
+## Implementation Approach
+
+Since this is a plain HTML website (not using a JavaScript framework like Next.js, React, etc.), I followed the HTML-specific implementation instructions from the Vercel Web Analytics documentation:
+
+- No npm package installation required for plain HTML sites
+- Added the tracking script directly to all HTML files
+- The script will automatically track page views once the site is deployed to Vercel
+
+## Notes
+
+- The analytics will only start collecting data after the site is deployed to Vercel with Web Analytics enabled in the dashboard
+- The script uses a deferred loading strategy to minimize impact on page load performance
+- Once deployed, a network request to `/_vercel/insights/view` should be visible in the browser's Network tab
+- No route tracking is available for plain HTML implementations (this would require a JavaScript framework)
+
+## Next Steps
+
+To complete the Vercel Web Analytics setup:
+1. Deploy the updated site to Vercel
+2. Enable Web Analytics in the Vercel dashboard (Project → Analytics tab → Enable)
+3. Verify tracking by checking for `/_vercel/insights/view` requests in browser Network tab
+4. View analytics data in the Vercel dashboard after deployment
+
+## Testing
+The changes have been verified by:
+- Confirming all 4 HTML files were modified correctly
+- Reviewing git diff to ensure only the analytics script was added
+- Ensuring the script placement is consistent across all files
+- Verifying no other code was modified or affected
